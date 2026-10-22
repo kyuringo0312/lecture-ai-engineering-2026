@@ -1,0 +1,24 @@
+[10/20] gemini-3.5-flash-lite t=None #10 1+1は？ → レート制限に達しました。1分ほど待ってから再実行してください。
+[14/20] gemini-3.5-flash-lite t=None #14 1+1は？ → レート制限に達しました。1分ほど待ってから再実行してください。
+[12/20] gemini-3.5-flash-lite t=None #12 1+1は？ → レート制限に達しました。1分ほど待ってから再実行してください。
+[6/20] gemini-3.5-flash-lite t=None #6 1+1は？ → 3.96s 入力6 出力8 思考0
+[17/20] gemini-3.5-flash-lite t=None #17 1+1は？ → 3.96s 入力6 出力7 思考0
+[19/20] gemini-3.5-flash-lite t=None #19 1+1は？ → 4.51s 入力6 出力7 思考0
+[8/20] gemini-3.5-flash-lite t=None #8 1+1は？ → 4.54s 入力6 出力7 思考0
+[20/20] gemini-3.5-flash-lite t=None #20 1+1は？ → 4.99s 入力6 出力7 思考0
+[4/20] gemini-3.5-flash-lite t=None #4 1+1は？ → 5.06s 入力6 出力7 思考0
+[15/20] gemini-3.5-flash-lite t=None #15 1+1は？ → 5.15s 入力6 出力7 思考0
+[3/20] gemini-3.5-flash-lite t=None #3 1+1は？ → 5.42s 入力6 出力7 思考0
+[16/20] gemini-3.5-flash-lite t=None #16 1+1は？ → 6.57s 入力6 出力7 思考0
+[11/20] gemini-3.5-flash-lite t=None #11 1+1は？ → 6.64s 入力6 出力7 思考0
+[18/20] gemini-3.5-flash-lite t=None #18 1+1は？ → 6.7s 入力6 出力7 思考0
+[9/20] gemini-3.5-flash-lite t=None #9 1+1は？ → 6.78s 入力6 出力7 思考0
+[5/20] gemini-3.5-flash-lite t=None #5 1+1は？ → 7.19s 入力6 出力7 思考0
+[13/20] gemini-3.5-flash-lite t=None #13 1+1は？ → 9.52s 入力6 出力7 思考0
+[1/20] gemini-3.5-flash-lite t=None #1 1+1は？ → 16.86s 入力6 出力7 思考0
+[2/20] gemini-3.5-flash-lite t=None #2 1+1は？ → 40.5s 入力6 出力7 思考0
+[7/20] gemini-3.5-flash-lite t=None #7 1+1は？ → 45.17s 入力6 出力7 思考0
+
+| モデル | temperature | 質問 | 成功/回数 | 応答時間 平均(最小〜最大) 秒 | 入力 | 出力 平均 | 思考 平均 | 合計 平均 | 回答の文字数 平均 |
+|---|---|---|---|---|---|---|---|---|---|
+| gemini-3.5-flash-lite | 既定 | 1+1は？ | 17/20 | 10.8(4.0〜45.2) | 6 | 7 | 0 | 13 | 8 |
