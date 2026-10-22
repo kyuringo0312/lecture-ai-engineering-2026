@@ -39,8 +39,9 @@ class FakeChat:
         self.history: list[str] = []
 
     def send_message(self, message: str) -> FakeResponse:
+        turn = len(self.history) // 2 + 1
         self.history.append(message)
-        reply = f"{len(self.history)}回目の回答"
+        reply = f"{turn}回目の回答"
         self.history.append(reply)
         return FakeResponse(reply, _usage(prompt=10 * len(self.history), output=5))
 
