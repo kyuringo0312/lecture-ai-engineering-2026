@@ -88,3 +88,13 @@ def test_chat_sends_first_question_from_command_line(monkeypatch, capsys):
     ask.chat("LoRAとは？")
 
     assert "1回目の回答" in capsys.readouterr().out
+
+
+def test_compare_summary_groups_runs_and_reports_errors():
+    from app import compare
+
+    ok = {"model": "m", "temperature": None, "question": "q", "seconds": 1.0, "input_tokens": 10,
+          "output_tokens": 20, "thought_tokens": 0, "total_tokens": 30, "text": "abc"}
+    table = compare.summarize([ok, dict(ok, seconds=3.0), {"model": "m2", "temperature": 0.0, "question": "q", "error": 429}])
+    assert "| m | 既定 | q | 2/2 | 2.0(1.0〜3.0) | 10 | 20 | 0 | 30 | 3 |" in table
+    assert "0/1（429）" in table
