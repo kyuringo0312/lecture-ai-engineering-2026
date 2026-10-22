@@ -11,6 +11,10 @@
     uv run python -m app.compare --temperatures 0 1 2 --repeat 3 \\
         --out lectures/01/results/temperature.jsonl
 
+    # 同時に20件投げて、レート制限（429）を確かめる（発展）
+    uv run python -m app.compare --questions "1+1は？" --repeat 20 --parallel 20 \\
+        --out lectures/01/results/parallel.jsonl
+
     # 記録済みの JSONL を表にするだけ
     uv run python -m app.compare --summary lectures/01/results/models.jsonl
 
@@ -20,8 +24,10 @@
 import argparse
 import json
 import statistics
+import threading
 import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from google import genai
@@ -99,6 +105,7 @@ def main() -> None:
     parser.add_argument("--temperatures", nargs="+", type=float, default=[None])
     parser.add_argument("--repeat", type=int, default=3)
     parser.add_argument("--interval", type=float, default=13.0, help="呼び出しの間に待つ秒数")
+    parser.add_argument("--parallel", type=int, default=1, help="同時に投げる数（2以上で --interval を使わない）")
     parser.add_argument("--out", type=Path, help="記録を追記する JSONL ファイル")
     parser.add_argument("--summary", type=Path, help="記録済みの JSONL を表にするだけ")
     args = parser.parse_args()
@@ -111,7 +118,6 @@ def main() -> None:
     if args.out:
         args.out.parent.mkdir(parents=True, exist_ok=True)
 
-    records = []
     plan = [
         (model, question, temperature, i)
         for model in args.models
@@ -119,21 +125,34 @@ def main() -> None:
         for temperature in args.temperatures
         for i in range(1, args.repeat + 1)
     ]
-    for n, (model, question, temperature, i) in enumerate(plan, 1):
-        if n > 1:
-            time.sleep(args.interval)
+    records = []
+    lock = threading.Lock()  # --parallel のとき、表示と書き込みが混ざらないようにする
+
+    def execute(n: int, model: str, question: str, temperature: float | None, i: int) -> dict:
         started_at = time.strftime("%H:%M:%S")
         record = run_once(client, model, question, temperature)
         record["run"] = i
         record["started_at"] = started_at
-        records.append(record)
         status = record.get("message") or f"{record['seconds']}s 入力{record['input_tokens']} 出力{record['output_tokens']} 思考{record['thought_tokens']}"
-        print(f"[{n}/{len(plan)}] {model} t={temperature} #{i} {question[:20]} → {status}", flush=True)
-        if args.out:
-            with args.out.open("a", encoding="utf-8") as f:
-                f.write(json.dumps(record, ensure_ascii=False) + "\n")
-        if record.get("error") == 429:
-            time.sleep(RATE_LIMIT_WAIT)
+        with lock:
+            print(f"[{n}/{len(plan)}] {model} t={temperature} #{i} {question[:20]} → {status}", flush=True)
+            records.append(record)
+            if args.out:
+                with args.out.open("a", encoding="utf-8") as f:
+                    f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        return record
+
+    if args.parallel > 1:
+        # 同時に投げて、1分あたりの上限（RPM）を超えたときの振る舞いを見る
+        with ThreadPoolExecutor(max_workers=args.parallel) as pool:
+            for n, item in enumerate(plan, 1):
+                pool.submit(execute, n, *item)
+    else:
+        for n, item in enumerate(plan, 1):
+            if n > 1:
+                time.sleep(args.interval)
+            if execute(n, *item).get("error") == 429:
+                time.sleep(RATE_LIMIT_WAIT)
 
     print()
     print(summarize(records))
