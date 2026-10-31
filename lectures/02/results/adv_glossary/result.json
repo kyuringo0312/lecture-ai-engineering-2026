@@ -1,0 +1,44 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 10,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 160,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）・用語集 Q&A で学習",
+  "train_size": 116,
+  "before": {
+    "label": "before",
+    "seconds": 231.0,
+    "known": "0/10",
+    "paraphrase": "0/5",
+    "reverse": "0/5",
+    "unknown_real_refused": "0/3",
+    "unknown_fake_refused": "0/3"
+  },
+  "after": {
+    "label": "after",
+    "seconds": 99.3,
+    "known": "10/10",
+    "paraphrase": "5/5",
+    "reverse": "0/5",
+    "unknown_real_refused": "0/3",
+    "unknown_fake_refused": "0/3"
+  },
+  "executed_training_myself": true
+}

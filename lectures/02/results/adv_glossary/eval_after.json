@@ -1,0 +1,265 @@
+{
+  "summary": {
+    "label": "after",
+    "seconds": 99.3,
+    "known": "10/10",
+    "paraphrase": "5/5",
+    "reverse": "0/5",
+    "unknown_real_refused": "0/3",
+    "unknown_fake_refused": "0/3"
+  },
+  "rows": [
+    {
+      "group": "known",
+      "question": "「LoRA」とは何ですか？",
+      "must_include": [
+        "低ランク"
+      ],
+      "raw": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「QLoRA」とは何ですか？",
+      "must_include": [
+        "量子化"
+      ],
+      "raw": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「宿題の3レベル」とは何ですか？",
+      "must_include": [
+        "基礎",
+        "実装",
+        "発展"
+      ],
+      "raw": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「answer.md」とは何ですか？",
+      "must_include": [
+        "lectures/NN/answer.md"
+      ],
+      "raw": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「lecNN-start タグ」とは何ですか？",
+      "must_include": [
+        "lec03-start"
+      ],
+      "raw": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「既定モデル」とは何ですか？",
+      "must_include": [
+        "gemini-3.5-flash-lite"
+      ],
+      "raw": "AIE2026の演習と宿題で標準に使うモデルは gemini-3.5-flash-lite。無料枠のレート制限と講座運営の安定性を考えて選んでいる。環境変数 AIE_MODEL で他のモデルに切り替えてよく、自分で契約したAPIを使ってもよい。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「TestModel」とは何ですか？",
+      "must_include": [
+        "偽モデル"
+      ],
+      "raw": "Pydantic AIに含まれるテスト用の偽モデル。実際のLLMを呼ばずに、ツールを呼び出してダミーの回答を返す。APIキーや利用枠を使わずに、エージェントの配線（ツールが登録され、呼ばれ、結果が返るか）をテストできる。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「Codespaces secret」とは何ですか？",
+      "must_include": [
+        "環境変数"
+      ],
+      "raw": "GitHubのアカウント設定に登録しておく秘密の値。指定したrepoのCodespacesを起動すると環境変数として渡される。登録時に使うrepo（自分のfork）を選ぶ必要がある。起動中に登録した場合はCodespacesの再起動が必要。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「過学習」とは何ですか？",
+      "must_include": [
+        "学習データ"
+      ],
+      "raw": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "known",
+      "question": "「ハーネス」とは何ですか？",
+      "must_include": [
+        "ループ"
+      ],
+      "raw": "LLMの周りを、ループ・ツール・画面（UI）などで包み、実際に作業できるようにするプログラム。Claude CodeやPiはハーネスの例。Piは組み込みツールをread・write・edit・bashの4つに絞った薄いハーネスとして知られる。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "paraphrase",
+      "question": "LoRA はどんな手法か簡単に教えてください",
+      "must_include": [
+        "低ランク"
+      ],
+      "raw": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "paraphrase",
+      "question": "宿題の3レベルにはどんな段階がありますか",
+      "must_include": [
+        "基礎",
+        "実装",
+        "発展"
+      ],
+      "raw": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "paraphrase",
+      "question": "この講座で標準に使う既定モデルは何ですか",
+      "must_include": [
+        "gemini-3.5-flash-lite"
+      ],
+      "raw": "AIE2026の演習と宿題で標準に使うモデルは gemini-3.5-flash-lite。無料枠のレート制限と講座運営の安定性を考えて選んでいる。環境変数 AIE_MODEL で他のモデルに切り替えてよく、自分で契約したAPIを使ってもよい。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "paraphrase",
+      "question": "answer.md はどこにあるファイルですか",
+      "must_include": [
+        "lectures/NN/answer.md"
+      ],
+      "raw": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "paraphrase",
+      "question": "過学習に気づくにはどうすればいいですか",
+      "must_include": [
+        "検証データ"
+      ],
+      "raw": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。テストデータや独立した検証データで性能を測って気づく。",
+      "content_ok": true,
+      "refused": false
+    },
+    {
+      "group": "reverse",
+      "question": "事前学習済みの重みを固定して小さな行列だけを学習する手法は何と呼びますか",
+      "must_include": [
+        "LoRA"
+      ],
+      "raw": "重みの大部分を古いモデルから取り、新しいデータの小さなサンプルで新しい重みを付けること。学習するパラメータが少なく、学習するデータも小さい。基礎の学習としてよく使う。",
+      "content_ok": false,
+      "refused": false
+    },
+    {
+      "group": "reverse",
+      "question": "重みを少ないビット数で表してメモリを減らす技術は何と呼びますか",
+      "must_include": [
+        "量子化"
+      ],
+      "raw": "AABBの輪郭を2ビットで表すこと。3つの頂点を2ビットで数える（例：上左上→上左下→下左上）。より小さな整数で距離を計算し、最小距離を整数で表す（pentagonal grid）。2ビットでは最大5つの頂点を扱える。",
+      "content_ok": false,
+      "refused": false
+    },
+    {
+      "group": "reverse",
+      "question": "LLM が事実と異なる内容をもっともらしく生成する現象は何と呼びますか",
+      "must_include": [
+        "ハルシネーション"
+      ],
+      "raw": "入力文に続く文章を、正しい内容ではなく、モデルの振る舞い（口調、フォーマット、特定の団おしなど）で作り出すこと。モデルが知らないこと（最新情報、組織や講座の知識など）を、もっともらしく事実と異なる内容で返す。1つの質問で複数の这种现象を看到る。Pydantic AIでは Agent のツールで捉える。",
+      "content_ok": false,
+      "refused": false
+    },
+    {
+      "group": "reverse",
+      "question": "1 回の更新でパラメータをどれだけ動かすかを決める値は何と呼びますか",
+      "must_include": [
+        "学習率"
+      ],
+      "raw": "モデルの重みを1つの更新で変わる最大レベル。少ないupdate → 学習が安定し、多いupdate → 学習が速い。",
+      "content_ok": false,
+      "refused": false
+    },
+    {
+      "group": "reverse",
+      "question": "この講座で演習の開始時点のコードに付けている Git タグは何と呼びますか",
+      "must_include": [
+        "lecNN-start"
+      ],
+      "raw": "演習の初期状態を固定するGitタグ。本講座では「lec_N/round_M/attempt_N」などで識別できる。前の回や前のattemptからこのまま進めば、同じ環境とコードの状態で新しい質問にも出る。",
+      "content_ok": false,
+      "refused": false
+    },
+    {
+      "group": "unknown_real",
+      "question": "「バッチ正規化」とは何ですか？",
+      "must_include": [],
+      "raw": "複数回の実行で同じコードを書き換えるようにする仕組み。A の実行で .git/repo.nippon 更新し、Bの実行で B/repo.nippon 更新し、最後にCの実行で C/repo.nippon 更新し、3回の差を1回の実行で .git/commit する。",
+      "content_ok": null,
+      "refused": false
+    },
+    {
+      "group": "unknown_real",
+      "question": "「Docker」とは何ですか？",
+      "must_include": [],
+      "raw": "サーバーをコンテナとして捉えるためのプラットフォーム。イメージ（バックアップ）をコピーして、どの環境に使うかをコンテキスト（設定ファイル）で決める。起動は、選んだ環境で進める。",
+      "content_ok": null,
+      "refused": false
+    },
+    {
+      "group": "unknown_real",
+      "question": "「Transformer」とは何ですか？",
+      "must_include": [],
+      "raw": "LLMのモデルとして広く知られるループ型AI。分割されたトークンで学習し、その結果を次のトークンへプロンプトとして入力して再びモデルに渡す、をモデルが繰り返す処理。基本構造は「モデル→入力→出力→モデル」というループ。",
+      "content_ok": null,
+      "refused": false
+    },
+    {
+      "group": "unknown_fake",
+      "question": "「ゼファーネスト法」とは何ですか？",
+      "must_include": [],
+      "raw": "AIE2026の演習と宿題の配布を自動で調整するAI開発ツール。学習支援プラットフォームのアセットと演習のコードを共有し、試験日に達したら学生が自分で評価する設計。本講座のCoreモジュールには統合されたゼファーネストが搭載されている。",
+      "content_ok": null,
+      "refused": false
+    },
+    {
+      "group": "unknown_fake",
+      "question": "「lecNN-end タグ」とは何ですか？",
+      "must_include": [],
+      "raw": "AIE2026の講座repoで、各回の演習結果に付けているGitタグ（例：mcp-20260301-end）。最終回の演習では自分のforkのmain branchから呼び出す。",
+      "content_ok": null,
+      "refused": false
+    },
+    {
+      "group": "unknown_fake",
+      "question": "「宿題の5レベル」とは何ですか？",
+      "must_include": [],
+      "raw": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3レベルがあり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "content_ok": null,
+      "refused": false
+    }
+  ]
+}
