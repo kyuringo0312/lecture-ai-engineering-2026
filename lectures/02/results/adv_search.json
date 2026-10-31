@@ -1,0 +1,503 @@
+{
+  "summary": {
+    "by_question": {
+      "known": "10/10",
+      "paraphrase": "5/5",
+      "reverse": "0/5",
+      "unknown_real_not_found": "3/3",
+      "unknown_fake_not_found": "3/3"
+    },
+    "by_keyword": {
+      "known": "10/10",
+      "paraphrase": "5/5",
+      "reverse": "5/5",
+      "unknown_real_not_found": "3/3",
+      "unknown_fake_not_found": "3/3"
+    }
+  },
+  "rows": [
+    {
+      "group": "known",
+      "question": "「LoRA」とは何ですか？",
+      "keyword": "LoRA",
+      "must_include": [
+        "低ランク"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "LoRA",
+        "ランク（LoRAのr）",
+        "QLoRA"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「QLoRA」とは何ですか？",
+      "keyword": "QLoRA",
+      "must_include": [
+        "量子化"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "QLoRA",
+        "LoRA"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「宿題の3レベル」とは何ですか？",
+      "keyword": "宿題の3レベル",
+      "must_include": [
+        "基礎",
+        "実装",
+        "発展"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "宿題の3レベル"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「answer.md」とは何ですか？",
+      "keyword": "answer.md",
+      "must_include": [
+        "lectures/NN/answer.md"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "answer.md"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「lecNN-start タグ」とは何ですか？",
+      "keyword": "lecNN-start タグ",
+      "must_include": [
+        "lec03-start"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "lecNN-start タグ"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「既定モデル」とは何ですか？",
+      "keyword": "既定モデル",
+      "must_include": [
+        "gemini-3.5-flash-lite"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "既定モデル"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「TestModel」とは何ですか？",
+      "keyword": "TestModel",
+      "must_include": [
+        "偽モデル"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "TestModel"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「Codespaces secret」とは何ですか？",
+      "keyword": "Codespaces secret",
+      "must_include": [
+        "環境変数"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "Codespaces secret",
+        "GitHub Codespaces",
+        "APIキー"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「過学習」とは何ですか？",
+      "keyword": "過学習",
+      "must_include": [
+        "学習データ"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "過学習",
+        "エポック"
+      ]
+    },
+    {
+      "group": "known",
+      "question": "「ハーネス」とは何ですか？",
+      "keyword": "ハーネス",
+      "must_include": [
+        "ループ"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "ハーネス"
+      ]
+    },
+    {
+      "group": "paraphrase",
+      "question": "LoRA はどんな手法か簡単に教えてください",
+      "keyword": "LoRA",
+      "must_include": [
+        "低ランク"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "LoRA",
+        "ランク（LoRAのr）",
+        "QLoRA"
+      ]
+    },
+    {
+      "group": "paraphrase",
+      "question": "宿題の3レベルにはどんな段階がありますか",
+      "keyword": "3レベル",
+      "must_include": [
+        "基礎",
+        "実装",
+        "発展"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "宿題の3レベル"
+      ]
+    },
+    {
+      "group": "paraphrase",
+      "question": "この講座で標準に使う既定モデルは何ですか",
+      "keyword": "既定モデル",
+      "must_include": [
+        "gemini-3.5-flash-lite"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "既定モデル"
+      ]
+    },
+    {
+      "group": "paraphrase",
+      "question": "answer.md はどこにあるファイルですか",
+      "keyword": "answer.md",
+      "must_include": [
+        "lectures/NN/answer.md"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "answer.md"
+      ]
+    },
+    {
+      "group": "paraphrase",
+      "question": "過学習に気づくにはどうすればいいですか",
+      "keyword": "過学習",
+      "must_include": [
+        "検証データ"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": true
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "過学習",
+        "エポック"
+      ]
+    },
+    {
+      "group": "reverse",
+      "question": "事前学習済みの重みを固定して小さな行列だけを学習する手法は何と呼びますか",
+      "keyword": "小さな行列",
+      "must_include": [
+        "LoRA"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": false
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "LoRA"
+      ]
+    },
+    {
+      "group": "reverse",
+      "question": "重みを少ないビット数で表してメモリを減らす技術は何と呼びますか",
+      "keyword": "ビット数",
+      "must_include": [
+        "量子化"
+      ],
+      "by_question": {
+        "found": false,
+        "ok": false
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "量子化"
+      ]
+    },
+    {
+      "group": "reverse",
+      "question": "LLM が事実と異なる内容をもっともらしく生成する現象は何と呼びますか",
+      "keyword": "もっともらしく",
+      "must_include": [
+        "ハルシネーション"
+      ],
+      "by_question": {
+        "found": true,
+        "ok": false
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "ハルシネーション"
+      ]
+    },
+    {
+      "group": "reverse",
+      "question": "1 回の更新でパラメータをどれだけ動かすかを決める値は何と呼びますか",
+      "keyword": "パラメータをどれだけ動かす",
+      "must_include": [
+        "学習率"
+      ],
+      "by_question": {
+        "found": false,
+        "ok": false
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "学習率"
+      ]
+    },
+    {
+      "group": "reverse",
+      "question": "この講座で演習の開始時点のコードに付けている Git タグは何と呼びますか",
+      "keyword": "開始時点",
+      "must_include": [
+        "lecNN-start"
+      ],
+      "by_question": {
+        "found": false,
+        "ok": false
+      },
+      "by_keyword": {
+        "found": true,
+        "ok": true
+      },
+      "keyword_terms": [
+        "lecNN-start タグ"
+      ]
+    },
+    {
+      "group": "unknown_real",
+      "question": "「バッチ正規化」とは何ですか？",
+      "keyword": "バッチ正規化",
+      "must_include": [],
+      "by_question": {
+        "found": false,
+        "ok": null
+      },
+      "by_keyword": {
+        "found": false,
+        "ok": null
+      },
+      "keyword_terms": []
+    },
+    {
+      "group": "unknown_real",
+      "question": "「Docker」とは何ですか？",
+      "keyword": "Docker",
+      "must_include": [],
+      "by_question": {
+        "found": false,
+        "ok": null
+      },
+      "by_keyword": {
+        "found": false,
+        "ok": null
+      },
+      "keyword_terms": []
+    },
+    {
+      "group": "unknown_real",
+      "question": "「Transformer」とは何ですか？",
+      "keyword": "Transformer",
+      "must_include": [],
+      "by_question": {
+        "found": false,
+        "ok": null
+      },
+      "by_keyword": {
+        "found": false,
+        "ok": null
+      },
+      "keyword_terms": []
+    },
+    {
+      "group": "unknown_fake",
+      "question": "「ゼファーネスト法」とは何ですか？",
+      "keyword": "ゼファーネスト法",
+      "must_include": [],
+      "by_question": {
+        "found": false,
+        "ok": null
+      },
+      "by_keyword": {
+        "found": false,
+        "ok": null
+      },
+      "keyword_terms": []
+    },
+    {
+      "group": "unknown_fake",
+      "question": "「lecNN-end タグ」とは何ですか？",
+      "keyword": "lecNN-end タグ",
+      "must_include": [],
+      "by_question": {
+        "found": false,
+        "ok": null
+      },
+      "by_keyword": {
+        "found": false,
+        "ok": null
+      },
+      "keyword_terms": []
+    },
+    {
+      "group": "unknown_fake",
+      "question": "「宿題の5レベル」とは何ですか？",
+      "keyword": "宿題の5レベル",
+      "must_include": [],
+      "by_question": {
+        "found": false,
+        "ok": null
+      },
+      "by_keyword": {
+        "found": false,
+        "ok": null
+      },
+      "keyword_terms": []
+    }
+  ]
+}
