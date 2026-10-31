@@ -1,0 +1,29 @@
+{
+  "run": "basic_epochs5",
+  "trainable_params": 6389760,
+  "all_params": 758782784,
+  "trainable_percent": 0.842,
+  "adapter_mb": 25.59,
+  "base_memory_gb": 3.01,
+  "log_history": [
+    {
+      "loss": 1.5741400718688965,
+      "grad_norm": 2.233461618423462,
+      "learning_rate": 2.9289321881345254e-05,
+      "entropy": 1.860527017712593,
+      "num_tokens": 17860.0,
+      "mean_token_accuracy": 0.6833854645490647,
+      "epoch": 5.0,
+      "step": 10
+    },
+    {
+      "train_runtime": 59.2684,
+      "train_samples_per_second": 1.181,
+      "train_steps_per_second": 0.169,
+      "total_flos": 55352062558464.0,
+      "train_loss": 1.5741400718688965,
+      "epoch": 5.0,
+      "step": 10
+    }
+  ]
+}

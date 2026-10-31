@@ -1,0 +1,143 @@
+{
+  "開館時間の決まりは？": {
+    "needs_review": false,
+    "must_include": [
+      "8:30",
+      "21:00"
+    ]
+  },
+  "平日の開館時間は何時から何時までですか": {
+    "needs_review": false,
+    "must_include": [
+      "8:30",
+      "21:00"
+    ]
+  },
+  "土曜の閉館時間は何時ですか": {
+    "needs_review": false,
+    "must_include": [
+      "8:30",
+      "21:00"
+    ]
+  },
+  "貸出のルールは？": {
+    "needs_review": false,
+    "must_include": [
+      "10 冊",
+      "2 週間"
+    ]
+  },
+  "一度に借りられる本の上限は何冊ですか": {
+    "needs_review": false,
+    "must_include": [
+      "10 冊",
+      "2 週間"
+    ]
+  },
+  "借りた本はいつまでに返せばいいですか": {
+    "needs_review": false,
+    "must_include": [
+      "10 冊",
+      "2 週間"
+    ]
+  },
+  "貸出延長のルールは？": {
+    "needs_review": false,
+    "must_include": [
+      "1 回",
+      "前日"
+    ]
+  },
+  "貸出の延長は何回までできますか": {
+    "needs_review": false,
+    "must_include": [
+      "1 回",
+      "前日"
+    ]
+  },
+  "延長手続きの締切を教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "1 回",
+      "前日"
+    ]
+  },
+  "プリンターの料金は？": {
+    "needs_review": false,
+    "must_include": [
+      "10 円",
+      "50 円"
+    ]
+  },
+  "印刷料金を白黒とカラーそれぞれ教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "10 円",
+      "50 円"
+    ]
+  },
+  "カラーで 1 枚印刷するといくらかかりますか": {
+    "needs_review": false,
+    "must_include": [
+      "10 円",
+      "50 円"
+    ]
+  },
+  "学習室の利用条件は？": {
+    "needs_review": false,
+    "must_include": [
+      "3 人",
+      "前日"
+    ]
+  },
+  "グループ学習室を使うには何人必要ですか": {
+    "needs_review": false,
+    "must_include": [
+      "3 人",
+      "前日"
+    ]
+  },
+  "学習室の予約の期限を教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "3 人",
+      "前日"
+    ]
+  },
+  "駐車場はありますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "貸出中の本を予約できますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "開館時間は祝日も同じですか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "カラー印刷は両面にできますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "電子書籍は借りられますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "図書館カードを失くしたらどうすればいいですか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  }
+}
