@@ -1,0 +1,22 @@
+[model] gemini-3.5-flash-lite
+
+[承認待ち] save_learning_log({'title': 'PEFTの要点まとめ', 'content': '# PEFT（Parameter-Efficient Fine-Tuning）の学習記録\n\n## 概要\nPEFTは、大規模言語モデルなどの全パラメータを更新するのではなく、ごく一部のパラメータや追加した小さなパラメータのみを効率的に学習する手法の総称です。\n\n## 主な特徴\n- **リソースの削減**: 従来のファインチューニングと比較して、必要なGPUメモリや学習コストを大きく削減できます。\n- **ストレージの節約**: 学習対象が一部（またはアダプタのみ）のため、保存するモデルの容量（ファイルサイズ）を小さく抑えられます。\n- **代表例**: LoRA（Low-Rank Adaptation）などがPEFTの代表的な手法として広く使われています。\n\n（関連: 第2回）'})
+実行してよいですか？ [y/N] → 実行しません
+PEFT（Parameter-Efficient Fine-Tuning）について調べました。
+
+### PEFTの要点
+- **定義**: モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の総称。
+- **メリット**: 必要なGPUメモリや保存容量を大きく削減できる。
+- **代表例**: LoRA（Low-Rank Adaptation）など。
+
+学習記録への保存を試みましたが、実行がキャンセルされました。内容を改めて保存したい場合は、お気軽にお申し付けください。
+
+（関連: 第2回）
+
+--- trace ---
+[tool call]   search_glossary({'query': 'PEFT'})
+[tool return] search_glossary -> [{"term": "PEFT", "lecture": 2, "definition": "モデルの全パラメータではなく、ごく一部や追加した小さなパラメータだけを学習する手法の総称。必要なGPUメモリと保存容量を大きく減らせる。LoRAが…
+[tool call]   save_learning_log({'title': 'PEFTの要点まとめ', 'content': '# PEFT（Parameter-Efficient Fine-Tuning）の学習記録\n\n## 概要\nPEFTは、大規模言語モデルなどの全パラメータを更新するのではなく、ごく一部のパラメータや追加した小さなパラメータのみを効率的に学習する手法の総称です。\n\n## 主な特徴\n- **リソースの削減**: 従来のファインチューニングと比較して、必要なGPUメモリや学習コストを大きく削減できます。\n- **ストレージの節約**: 学習対象が一部（またはアダプタのみ）のため、保存するモデルの容量（ファイルサイズ）を小さく抑えられます。\n- **代表例**: LoRA（Low-Rank Adaptation）などがPEFTの代表的な手法として広く使われています。\n\n（関連: 第2回）'})
+[tool return] save_learning_log -> 利用者が実行を断りました。…
+[usage] RunUsage(cost=Decimal('0.0006087'), details={'text_prompt_tokens': 1029}, input_text_tokens=1029, input_tokens=1029, output_tokens=120, requests=1)
+learning_log のファイル数: 1 -> 1

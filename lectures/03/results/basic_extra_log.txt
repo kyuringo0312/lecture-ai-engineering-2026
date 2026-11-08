@@ -1,0 +1,4 @@
+[no_search_anywhere] LoRAとQLoRAの違いは？ #1 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[no_search_anywhere] LoRAとQLoRAの違いは？ #2 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[no_search_anywhere] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #1 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[no_search_anywhere] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #2 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
