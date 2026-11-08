@@ -29,6 +29,14 @@ def test_save_learning_log_writes_markdown(tmp_path, monkeypatch):
     assert files[0].read_text(encoding="utf-8").startswith("# LoRA の復習")
 
 
+def test_save_learning_log_does_not_repeat_heading(tmp_path, monkeypatch):
+    # 実行してみると、モデルは本文の先頭にも「# 題名」を書くことがあった
+    monkeypatch.setattr(tools, "LOG_DIR", tmp_path / "learning_log")
+    tools.save_learning_log("LoRAとQLoRAの違い", "# LoRAとQLoRAの違い\n\n- LoRA: ...")
+    text = next((tmp_path / "learning_log").glob("*.md")).read_text(encoding="utf-8")
+    assert text.count("# LoRAとQLoRAの違い") == 1
+
+
 def _run_until_approval(monkeypatch, tmp_path):
     monkeypatch.setattr(tools, "LOG_DIR", tmp_path / "learning_log")
     model = TestModel(call_tools=["save_learning_log"])

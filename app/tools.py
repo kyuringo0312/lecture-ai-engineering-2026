@@ -109,5 +109,8 @@ def save_learning_log(title: str, content: str) -> str:
     LOG_DIR.mkdir(exist_ok=True)
     slug = re.sub(r"[^\w\-]+", "_", title).strip("_")[:40] or "log"
     path = LOG_DIR / f"{datetime.now():%Y%m%d-%H%M%S}_{slug}.md"
-    path.write_text(f"# {title}\n\n{content.strip()}\n", encoding="utf-8")
+    body = content.strip()
+    # モデルが本文の先頭にも見出しを書くことがあるので、そのときは題名の見出しを重ねない
+    text = body if body.startswith("# ") else f"# {title}\n\n{body}"
+    path.write_text(text + "\n", encoding="utf-8")
     return f"{path.relative_to(LOG_DIR.parent)} に保存しました。"
