@@ -36,6 +36,13 @@ VARIANTS = {
         ONE_TERM, 'query には調べたい用語をまとめて入れる（例: "LoRA QLoRA"）。')),
     "quiz_at_end": (INSTRUCTIONS.replace(SHOW_LECTURE, "- 回答の最後に、確認問題を1問出す。\n"), tools.search_glossary.__doc__),
 }
+# 追加の検証（2 か所を同時に変えるので、上の 1 か所ずつの比較とは分けて扱う）:
+# 「必ず検索する」の指示と、説明文の「答える前に使うこと」の両方を消すと、検索しなくなるか
+BEFORE_ANSWER = "答える前に使うこと。"
+assert BEFORE_ANSWER in tools.search_glossary.__doc__
+EXTRA_VARIANTS = {
+    "no_search_anywhere": (INSTRUCTIONS.replace(MUST_SEARCH, ""), tools.search_glossary.__doc__.replace(BEFORE_ANSWER, "調べたいときに使う。")),
+}
 QUESTIONS = [
     "LoRAとQLoRAの違いは？",
     "AIE2026の講座で使う「lecNN-start タグ」とは何ですか？",
@@ -77,12 +84,13 @@ def main() -> None:
     parser.add_argument("--repeat", type=int, default=2)
     parser.add_argument("--interval", type=float, default=20.0, help="無料枠の毎分の上限を超えないよう、実行の間に待つ秒数")
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--extra", action="store_true", help="追加の検証（EXTRA_VARIANTS）だけを実行する")
     args = parser.parse_args()
     args.out.parent.mkdir(parents=True, exist_ok=True)
 
     model = build_model()
     n = 0
-    for variant, (instructions, doc) in VARIANTS.items():
+    for variant, (instructions, doc) in (EXTRA_VARIANTS if args.extra else VARIANTS).items():
         a = build_agent(instructions, doc)
         for question in QUESTIONS:
             for i in range(1, args.repeat + 1):

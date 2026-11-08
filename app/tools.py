@@ -102,8 +102,9 @@ def save_learning_log(title: str, content: str) -> str:
     """学習の記録（その日に学んだことのまとめ）を learning_log/ フォルダに Markdown で保存する。
 
     利用者が「学習記録に保存して」「今日のまとめを残して」のように保存を頼んだときだけ使う。
-    title には記録の題名を、content には保存する本文を入れる。保存は取り消しにくいので、
-    実行の前に利用者の承認を求める。
+    title には記録の題名を、content には保存する本文を入れる。
+    保存を頼まれたら、利用者に聞き返さずにすぐこのツールを呼ぶこと。実行してよいかの
+    確認は、システムが利用者に直接行う。
     """
     LOG_DIR.mkdir(exist_ok=True)
     slug = re.sub(r"[^\w\-]+", "_", title).strip("_")[:40] or "log"
