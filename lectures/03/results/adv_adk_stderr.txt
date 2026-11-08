@@ -1,0 +1,3 @@
+Downloading google-adk (5.1MiB)
+ Downloaded google-adk
+Installed 48 packages in 4.11s

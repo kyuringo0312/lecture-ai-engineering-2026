@@ -1,0 +1,16 @@
+[base] LoRAとQLoRAの違いは？ #1 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[base] LoRAとQLoRAの違いは？ #2 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[base] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #1 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[base] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #2 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[no_must_search] LoRAとQLoRAの違いは？ #1 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[no_must_search] LoRAとQLoRAの違いは？ #2 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[no_must_search] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #1 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[no_must_search] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #2 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[doc_bulk_query] LoRAとQLoRAの違いは？ #1 requests=2 calls=[search_glossary({"query": "LoRA QLoRA"})] error=None
+[doc_bulk_query] LoRAとQLoRAの違いは？ #2 requests=2 calls=[search_glossary({"query": "LoRA QLoRA"})] error=None
+[doc_bulk_query] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #1 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[doc_bulk_query] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #2 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[quiz_at_end] LoRAとQLoRAの違いは？ #1 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[quiz_at_end] LoRAとQLoRAの違いは？ #2 requests=2 calls=[search_glossary({"query": "LoRA"}), search_glossary({"query": "QLoRA"})] error=None
+[quiz_at_end] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #1 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
+[quiz_at_end] AIE2026の講座で使う「lecNN-start タグ」とは何ですか？ #2 requests=2 calls=[search_glossary({"query": "lecNN-start タグ"})] error=None
