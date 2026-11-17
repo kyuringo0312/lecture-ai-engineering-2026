@@ -65,6 +65,24 @@ class JudgeResult(BaseModel):
     clarity: CriterionVerdict = Field(description="分かりやすさ：質問に直接、簡潔に答えているか")
 
 
+class CriterionVerdictFirst(BaseModel):
+    """第4回 宿題（基礎）: verdict を先に決めさせてから reason を書かせる版（判定→理由の順）。"""
+
+    verdict: Verdict = Field(description="pass / fail / unsure のどれか")
+    reason: str = Field(description="判定の理由。日本語で 1〜2 文")
+
+
+class JudgeResultVerdictFirst(BaseModel):
+    grounding: CriterionVerdictFirst = Field(description=JudgeResult.model_fields["grounding"].description)
+    scope: CriterionVerdictFirst = Field(description=JudgeResult.model_fields["scope"].description)
+    hint: CriterionVerdictFirst = Field(description=JudgeResult.model_fields["hint"].description)
+    clarity: CriterionVerdictFirst = Field(description=JudgeResult.model_fields["clarity"].description)
+
+
+REASON_FIRST_RULE = "先に理由を書いてから判定を決める"
+VERDICT_FIRST_RULE = "先に判定を決めてから理由を書く"
+
+
 # ---------------------------------------------------------------- 読み書き
 def read_jsonl(path: Path) -> list[dict]:
     with open(path, encoding="utf-8") as f:
@@ -114,7 +132,15 @@ def judge_prompt(case: dict) -> str:
     return f"# 質問\n{case['question']}\n\n# 回答\n{case['answer']}\n\n# 参照\n{reference_text(case)}"
 
 
-def build_judge(model, rubric: str) -> Agent:
+def build_judge(model, rubric: str, verdict_first: bool = False) -> Agent:
+    if verdict_first:
+        # 宿題（基礎）: 順序だけを入れ替える。基準の文言はそのままで、順序に触れている 1 文だけを合わせる
+        instructions = rubric.replace(REASON_FIRST_RULE, VERDICT_FIRST_RULE) + (
+            "\n\n# 出力の形式\n"
+            "4 つの基準（grounding, scope, hint, clarity）それぞれについて、verdict を先に pass / fail / unsure の"
+            "どれかに決め、そのあとで reason（理由）を書いてください。"
+        )
+        return Agent(model, output_type=JudgeResultVerdictFirst, instructions=instructions, model_settings={"temperature": 0.0})
     instructions = rubric + (
         "\n\n# 出力の形式\n"
         "4 つの基準（grounding, scope, hint, clarity）それぞれについて、reason（理由）を先に書き、"
@@ -188,13 +214,28 @@ def build_test_model() -> FunctionModel:
 
 
 # ---------------------------------------------------------------- 採点と集計
+def _first_written_field(result) -> str | None:
+    """LLM の出力で、reason と verdict のどちらが先に書かれたか（順序の指定が効いたかの確認用）。"""
+    for message in result.new_messages():
+        for part in message.parts:
+            if isinstance(part, ToolCallPart):
+                text = part.args if isinstance(part.args, str) else json.dumps(part.args, ensure_ascii=False)
+                r, v = text.find('"reason"'), text.find('"verdict"')
+                if r >= 0 and v >= 0:
+                    return "reason" if r < v else "verdict"
+    return None
+
+
 def judge_cases(agent: Agent, cases: list[dict], wait: float = 0.0) -> dict[str, dict]:
     """評価セットを 1 件ずつ採点する。戻り値は id → {基準: {reason, verdict}}。"""
     verdicts: dict[str, dict] = {}
+    first_written = {"reason": 0, "verdict": 0}
     print(f"採点中 {len(cases)} 件 ", end="", flush=True)
     for case in cases:
         result = agent.run_sync(judge_prompt(case))
         out: JudgeResult = result.output
+        for key in first_written:
+            first_written[key] += int(_first_written_field(result) == key)
         verdicts[case["id"]] = {key: getattr(out, key).model_dump() for key, _ in LLM_CRITERIA}
         verdicts[case["id"]]["lecture_mark"] = {
             "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
@@ -204,6 +245,7 @@ def judge_cases(agent: Agent, cases: list[dict], wait: float = 0.0) -> dict[str,
         if wait:
             time.sleep(wait)
     print()
+    print(f"[order] 出力で先に書かれた項目: reason {first_written['reason']} 件 / verdict {first_written['verdict']} 件")
     return verdicts
 
 
@@ -330,6 +372,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--model", default=None, help="採点に使うモデル。既定は AIE_MODEL。'test' で API を呼ばない偽モデル")
     parser.add_argument("--wait", type=float, default=0.0, help="1 件ごとに待つ秒数（レート制限にかかるとき）")
     parser.add_argument("--compare", type=Path, help="LLM を呼ばず、このラベルファイルと --labels の一致率を出す")
+    parser.add_argument("--verdict-first", action="store_true", help="宿題（基礎）: 判定を先に、理由を後に書かせる")
     parser.add_argument("--generate", action="store_true", help="評価セットの回答を自分のエージェントで生成し直す（--cases に上書き）")
     args = parser.parse_args(argv)
 
@@ -343,7 +386,7 @@ def main(argv: list[str] | None = None) -> None:
 
     if args.generate:
         try:
-            cases = generate_answers(cases)
+            cases = generate_answers(cases, wait=args.wait or 1.0)
         except ModelHTTPError as e:
             print(api_error_message(e.status_code, str(e.body)[:200]))
             raise SystemExit(1)
@@ -362,9 +405,9 @@ def main(argv: list[str] | None = None) -> None:
         print("[model] test（API を呼ばず、簡単な規則で判定する偽モデル。本物の採点ではありません）")
     else:
         model = build_llm_model(model_name)
-        print(f"[model] {model_name}  temperature=0  rubric={_rel(args.rubric)}")
+        print(f"[model] {model_name}  temperature=0  rubric={_rel(args.rubric)}  order={'verdict→reason' if args.verdict_first else 'reason→verdict'}")
 
-    judge = build_judge(model, rubric)
+    judge = build_judge(model, rubric, verdict_first=args.verdict_first)
     try:
         verdicts = judge_cases(judge, cases, wait=args.wait)
     except ModelHTTPError as e:
@@ -381,7 +424,7 @@ def main(argv: list[str] | None = None) -> None:
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(
         json.dumps(
-            {"model": model_name, "rubric": str(_rel(args.rubric)), "run_at": datetime.now().isoformat(timespec="seconds"),
+            {"model": model_name, "rubric": str(_rel(args.rubric)), "verdict_first": args.verdict_first, "run_at": datetime.now().isoformat(timespec="seconds"),
              "verdicts": verdicts, "summary": summary},
             ensure_ascii=False, indent=2,
         ),
