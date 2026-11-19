@@ -22,6 +22,10 @@ RAG_TOP_K = 5
 GRAPH_START_K = 3
 GRAPH_HOPS = 2
 GRAPH_MAX_RESULTS = 10
+# 第5回 宿題（実装）: 検索結果に同じ資料の前後 N ページの本文も付ける。0 なら付けない
+RAG_NEIGHBOR_WINDOW = int(os.getenv("AIE_RAG_NEIGHBORS", "0"))
+# 第5回 宿題（発展）: "focused" にすると、質問に出てくる用語だけをたどり、質問との近さで候補を選ぶ
+GRAPH_MODE = os.getenv("AIE_GRAPH_MODE", "structure")
 EMBEDDING_MODEL = "gemini-embedding-001"
 EMBEDDING_DIMENSIONS = 768
 # 2,048トークンの上限に対し、タスク指定等の分を残す。超過時は切り捨てず停止する。

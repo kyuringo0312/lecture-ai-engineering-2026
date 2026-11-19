@@ -185,6 +185,91 @@ def search_graph(query: str) -> dict:
             "max_hops": GRAPH_HOPS}
 
 
+def add_neighbors(hits: list[dict], window: int = 1) -> list[dict]:
+    """第5回 宿題（実装）: 検索結果の各ページに、同じ資料の前後 window ページの本文を足す。
+
+    スライドの説明は前後のページに続くことが多いので、検索で当たったページの隣も一緒に渡す。
+    同じページは 1 回だけ返し、隣のページには、どの検索結果の隣かを neighbor_of に残す。
+    """
+    pages = load_pages(RAG_SOURCE)
+    position = {page["page_id"]: i for i, page in enumerate(pages)}
+    seen = {hit["page_id"] for hit in hits}
+    results = []
+    for hit in hits:
+        results.append({**hit, "role": "hit"})
+        i = position.get(hit["page_id"])
+        if i is None:
+            continue
+        for j in range(i - window, i + window + 1):
+            if j == i or not 0 <= j < len(pages):
+                continue
+            page = pages[j]
+            if page["document_id"] != hit["document_id"] or page["page_id"] in seen:
+                continue
+            seen.add(page["page_id"])
+            results.append({**page, "role": "neighbor", "neighbor_of": hit["page_id"]})
+    return results
+
+
+def matched_terms(query: str, terms: list[dict]) -> list[dict]:
+    """質問の文字列に、名前か別名がそのまま出てくる用語を返す（2文字未満の別名は使わない）。"""
+    q = query.casefold()
+    return [term for term in terms
+            if any(len(name) >= 2 and name.casefold() in q for name in [term["title"], *term.get("aliases", [])])]
+
+
+def search_graph_focused(query: str) -> dict:
+    """第5回 宿題（発展）: 質問に出てくる用語と前後ページだけをたどり、質問との近さで候補を選ぶ。
+
+    元の search_graph は、入口から 2 hop 以内のページを「hop 数 → 用語の珍しさ」の順に選ぶので、
+    質問と関係の薄い用語を経由したページも入る。ここでは、
+    1. 入口：ベクトル検索の上位 GRAPH_START_K ページ（元と同じ）
+    2. 候補：入口の前後ページ（next_page）と、質問に出てくる用語に言及するページ（mentions）
+    3. 選択：候補を質問との距離が近い順に並べ、入口と合わせて最大 GRAPH_MAX_RESULTS ページ
+    とする。グラフは「どこを候補にするか」を絞るために使い、順位は質問との近さで決める。
+    """
+    if not isinstance(query, str) or not query.strip():
+        raise ValueError("検索語が空です。")
+    pages = {page["page_id"]: page for page in load_pages(RAG_SOURCE)}
+    graph = json.loads(RAG_GRAPH.read_text(encoding="utf-8"))
+    terms = matched_terms(query, [node for node in graph["nodes"] if node["kind"] == "term"])
+    mentioned_by, next_pages = defaultdict(set), defaultdict(set)
+    for edge in graph["edges"]:
+        a, b = edge["source"], edge["target"]
+        if edge["relation"] == "mentions":
+            page, term = (a, b) if b.startswith("term:") else (b, a)
+            mentioned_by[term].add(page)
+        elif edge["relation"] == "next_page":
+            next_pages[a].add(b)
+            next_pages[b].add(a)
+
+    with open_index(RAG_DB) as db:
+        vector = embed_text(query.strip(), "RETRIEVAL_QUERY")
+        rows = db.execute("SELECT page_id, vec_distance_cosine(embedding, ?) AS distance FROM chunks",
+                          (sqlite_vec.serialize_float32(vector),))
+        distance = {row["page_id"]: row["distance"] for row in rows if row["page_id"] in pages}
+
+    seeds = sorted(distance, key=lambda p: (distance[p], p))[:min(GRAPH_START_K, GRAPH_MAX_RESULTS)]
+    via = {}
+    for seed in seeds:
+        for page_id in sorted(next_pages[seed]):
+            if page_id in distance:
+                via.setdefault(page_id, f"前後ページ（{pages[seed]['title']}）")
+    for term in terms:
+        for page_id in sorted(mentioned_by[term["id"]]):
+            if page_id in distance:
+                via.setdefault(page_id, f"用語「{term['title']}」")
+    for seed in seeds:
+        via.pop(seed, None)
+    chosen = sorted(via, key=lambda p: (distance[p], p))[:max(0, GRAPH_MAX_RESULTS - len(seeds))]
+    return {
+        "seeds": [{**pages[p], "distance": distance[p]} for p in seeds],
+        "expanded": [{**pages[p], "distance": distance[p], "via": via[p]} for p in chosen],
+        "matched_terms": [term["title"] for term in terms],
+        "candidates": len(via),
+    }
+
+
 
 def run_full_context(agent, question: str, model, instructions: str, prompt_template: str):
     """全資料を一括投入し、検索ツールを使わずに回答する。"""
@@ -201,9 +286,14 @@ def run_full_context(agent, question: str, model, instructions: str, prompt_temp
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="エージェントを使わず、講義資料の検索だけを実行する")
     parser.add_argument("query", help="調べたい内容")
+    parser.add_argument("--neighbors", type=int, default=0, help="第5回 宿題（実装）: 前後 N ページの本文も付ける")
     args = parser.parse_args()
-    for i, result in enumerate(search(args.query), 1):
-        print(f"\n{'=' * 60}\n検索結果 {i}\n{'=' * 60}")
+    results = search(args.query)
+    if args.neighbors:
+        results = add_neighbors(results, args.neighbors)
+    for i, result in enumerate(results, 1):
+        role = f"（{result['neighbor_of']} の隣）" if result.get("role") == "neighbor" else ""
+        print(f"\n{'=' * 60}\n検索結果 {i}{role}\n{'=' * 60}")
         print(f"講義: {result['document_title']}")
         print(f"章: {result['section']}")
         print(f"タイトル: {result['title']}")

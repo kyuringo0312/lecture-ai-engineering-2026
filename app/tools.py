@@ -125,10 +125,15 @@ def search_materials(query: str) -> str:
     """
     from google.genai.errors import APIError
     import sqlite3
-    from app.retrieval import search
+    from app import config
+    from app.retrieval import add_neighbors, search
 
     try:
-        return json.dumps({"results": search(query)}, ensure_ascii=False)
+        results = search(query)
+        # 第5回 宿題（実装）: AIE_RAG_NEIGHBORS=N のとき、前後 N ページの本文も付ける
+        if config.RAG_NEIGHBOR_WINDOW:
+            results = add_neighbors(results, config.RAG_NEIGHBOR_WINDOW)
+        return json.dumps({"results": results}, ensure_ascii=False)
     except (ValueError, FileNotFoundError, sqlite3.Error) as e:
         return json.dumps({"error": str(e), "results": []}, ensure_ascii=False)
     except APIError as e:
@@ -155,7 +160,11 @@ def search_graph(query: str) -> str:
     """
     import sqlite3
     from google.genai.errors import APIError
-    from app.retrieval import search_graph as search
+    from app import config
+    from app.retrieval import search_graph, search_graph_focused
+
+    # 第5回 宿題（発展）: AIE_GRAPH_MODE=focused のとき、質問の用語で絞り、質問との近さで選ぶ
+    search = search_graph_focused if config.GRAPH_MODE == "focused" else search_graph
 
     try:
         return json.dumps(search(query), ensure_ascii=False)
