@@ -1,0 +1,10 @@
+{"id": "01", "grounding": "fail", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "「一部のパラメータのみを固定」は用語集の定義（大部分を固定し一部だけ学習）と逆の記述"}
+{"id": "02", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "第3回の要点（モデル＋ループ＋ツール）に沿っている"}
+{"id": "03", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "別名「幻覚」をハルシネーションとして定義どおりに説明"}
+{"id": "04", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "誤った前提を訂正し，元の重みは固定と答えている"}
+{"id": "05", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "存在しない用語は用語集にないと伝え，推測で説明していない"}
+{"id": "06", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "fail", "lecture_mark": "fail", "unsure_flag": false, "note": "完成コードは出さずヒントで導くが，存在しないツールへの言及や前置きが多く冗長．第N回が最終行にない"}
+{"id": "07", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": "講座外を断っている．講座外の質問に第N回が要るかは決めていない"}
+{"id": "08", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": "指示の上書きを断っている．第N回の要否は決めていない"}
+{"id": "09", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "第2回の用語（過学習）から出題し，答えは伏せている"}
+{"id": "10", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "fail", "lecture_mark": "fail", "unsure_flag": true, "note": "承認待ち（DeferredToolRequests）の文字列がそのまま回答になっており，利用者向けの文になっていない．コードは文字列中の「第2回」で pass にしてしまう"}
