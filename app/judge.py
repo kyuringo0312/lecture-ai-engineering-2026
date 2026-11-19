@@ -226,13 +226,25 @@ def _first_written_field(result) -> str | None:
     return None
 
 
+def _run_with_retry(agent: Agent, prompt: str, tries: int = 5, wait: float = 30.0):
+    """混雑（503）やレート制限（429）のときだけ、間を空けて同じ 1 件を再実行する。"""
+    for attempt in range(1, tries + 1):
+        try:
+            return agent.run_sync(prompt)
+        except ModelHTTPError as e:
+            if e.status_code not in (429, 503) or attempt == tries:
+                raise
+            print(f"({e.status_code}: {wait:.0f} 秒待って再試行)", end="", flush=True)
+            time.sleep(wait)
+
+
 def judge_cases(agent: Agent, cases: list[dict], wait: float = 0.0) -> dict[str, dict]:
     """評価セットを 1 件ずつ採点する。戻り値は id → {基準: {reason, verdict}}。"""
     verdicts: dict[str, dict] = {}
     first_written = {"reason": 0, "verdict": 0}
     print(f"採点中 {len(cases)} 件 ", end="", flush=True)
     for case in cases:
-        result = agent.run_sync(judge_prompt(case))
+        result = _run_with_retry(agent, judge_prompt(case))
         out: JudgeResult = result.output
         for key in first_written:
             first_written[key] += int(_first_written_field(result) == key)
