@@ -1,0 +1,186 @@
+Traceback (most recent call last):
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 98, in map_httpcore_exceptions
+    yield
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 388, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/connection_pool.py", line 242, in handle_async_request
+    raise exc from None
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/connection_pool.py", line 224, in handle_async_request
+    response = await connection.handle_async_request(pool_request.request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/connection.py", line 96, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 125, in handle_async_request
+    raise exc
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 97, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 167, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 200, in _receive_event
+    data = await self._network_stream.read(self.READ_NUM_BYTES, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_backends/anyio.py", line 34, in read
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_exceptions.py", line 17, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore2.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/models/google.py", line 980, in _generate_content
+    return await func(model=self._model_name, contents=contents, config=config)  # pyright: ignore[reportReturnType]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/models.py", line 8507, in generate_content
+    return await self._generate_content_with_continuation(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/models.py", line 8346, in _generate_content_with_continuation
+    response = await self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/models.py", line 6944, in _generate_content
+    response = await self._api_client.async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1885, in async_request
+    result = await self._async_request(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1818, in _async_request
+    return await self._async_retry(  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 112, in __call__
+    do = await self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 157, in iter
+    result = await action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/_utils.py", line 111, in inner
+    return call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 116, in __call__
+    result = await fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1791, in _async_request_once
+    client_response = await self._async_httpx_client.request(  # type: ignore[union-attr]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1635, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1818, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1846, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1881, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1915, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 387, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 115, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx2.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspaces/lecture-ai-engineering-2026/app/agent.py", line 256, in <module>
+    main()
+  File "/workspaces/lecture-ai-engineering-2026/app/agent.py", line 245, in main
+    result = run_with_approval(target, args.question, build_model())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/app/agent.py", line 197, in run_with_approval
+    result = target.run_sync(question, model=model)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/agent/abstract.py", line 827, in run_sync
+    return _utils.run_until_complete(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_utils.py", line 108, in run_until_complete
+    return _graph_run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/_utils.py", line 116, in run_until_complete
+    return loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/agent/abstract.py", line 678, in run
+    node = await agent_run.next(node)  # pyright: ignore[reportArgumentType]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 656, in next
+    return await self._run_node_with_hooks(node, self._stream_and_advance)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 571, in _run_node_with_hooks
+    result = await lifecycle(node)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 551, in lifecycle
+    result = await step_fn(lifecycle_node)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 670, in _stream_and_advance
+    return await self._advance_graph(node)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 466, in _advance_graph
+    task = await self._graph_run.next(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 579, in next
+    return await anext(self)
+           ^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 556, in __anext__
+    raise self._next.error
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 857, in _run_tracked_task
+    result = await self._run_task(t_)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 915, in _run_task
+    output = await node.call(step_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/step.py", line 253, in _call_node
+    return await node.run(GraphRunContext(state=ctx.state, deps=ctx.deps))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1397, in run
+    return await self._make_request(ctx)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1765, in _make_request
+    model_response = await model_handler(request_context)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1748, in model_handler
+    response = await self._recover_model_request_error(ctx, run_context, req_ctx, e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 2136, in _recover_model_request_error
+    raise error
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1734, in model_handler
+    response = await model_request(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1231, in model_request
+    new_response = await model.request(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/models/google.py", line 694, in request
+    response = await self._generate_content(messages, False, model_settings, model_request_parameters)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/models/google.py", line 982, in _generate_content
+    raise _map_api_error(e, self._model_name, self._provider.model_id_namespace) from e
+pydantic_ai.exceptions.ModelAPIError: ReadTimeout
+[model] gemini-3.1-flash-lite

@@ -1,0 +1,30 @@
+
+## Q1 第2回の説明では、LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？
+根拠ページ: lec02p52
+- ベクトル top5: 5ページ / 本文2,956字 / 根拠 1/1  [*lec02p52 lec02p51 lec02p60 lec02p61 lec02p47]
+- ベクトル top3: 3ページ / 本文1,845字 / 根拠 1/1  [*lec02p52 lec02p51 lec02p60]
+- top5＋前後1ページ: 11ページ / 本文5,561字 / 根拠 1/1  [*lec02p52 lec02p53 lec02p51 lec02p50 lec02p60 lec02p59 lec02p61 lec02p62 lec02p47 lec02p46 lec02p48]
+- top3＋前後1ページ: 7ページ / 本文3,587字 / 根拠 1/1  [*lec02p52 lec02p53 lec02p51 lec02p50 lec02p60 lec02p59 lec02p61]
+- Graph（元）: 10ページ / 本文5,382字 / 根拠 1/1  [*lec02p52 lec02p51 lec02p60 lec02p53 lec02p50 lec02p59 lec02p61 lec02p49 lec02p62 lec02p47]
+- Graph（用語で絞る）: 10ページ / 本文5,492字 / 根拠 1/1  [*lec02p52 lec02p51 lec02p60 lec02p61 lec02p47 lec02p54 lec02p53 lec02p58 lec02p59 lec02p50]
+  （用語で絞る Graph: 質問から拾った用語 ['LoRA', 'QLoRA']，候補 8 ページ）
+
+## Q2 第3回の例では、コンパクションとセッションをまたぐメモリはどう違いますか。日々のメモはすべて長期メモリに入りますか
+根拠ページ: lec03p13, lec03p39, lec03p40
+- ベクトル top5: 5ページ / 本文2,382字 / 根拠 3/3  [lec03p65 *lec03p39 lec03p38 *lec03p40 *lec03p13]
+- ベクトル top3: 3ページ / 本文1,638字 / 根拠 1/3  [lec03p65 *lec03p39 lec03p38]
+- top5＋前後1ページ: 11ページ / 本文5,054字 / 根拠 3/3  [lec03p65 lec03p64 lec03p66 *lec03p39 lec03p38 lec03p37 *lec03p40 lec03p41 *lec03p13 lec03p12 lec03p14]
+- top3＋前後1ページ: 7ページ / 本文3,705字 / 根拠 2/3  [lec03p65 lec03p64 lec03p66 *lec03p39 *lec03p40 lec03p38 lec03p37]
+- Graph（元）: 10ページ / 本文5,658字 / 根拠 2/3  [lec03p65 *lec03p39 lec03p38 lec03p64 lec03p66 *lec03p40 lec03p37 lec03p63 lec03p67 lec03p41]
+- Graph（用語で絞る）: 10ページ / 本文4,725字 / 根拠 3/3  [lec03p65 *lec03p39 lec03p38 *lec03p40 *lec03p13 lec03p41 lec03p37 lec03p64 lec03p3 lec03p4]
+  （用語で絞る Graph: 質問から拾った用語 ['メモリ']，候補 16 ページ）
+
+## Q4 第2回の説明では、Fine-Tuningで知識を足すのが難しいのはなぜですか。知識を足したいときは何を使うとよいとされていますか
+根拠ページ: lec02p46, lec02p47, lec02p53
+- ベクトル top5: 5ページ / 本文2,088字 / 根拠 3/3  [*lec02p46 *lec02p47 *lec02p53 lec02p27 lec02p57]
+- ベクトル top3: 3ページ / 本文1,376字 / 根拠 3/3  [*lec02p46 *lec02p47 *lec02p53]
+- top5＋前後1ページ: 13ページ / 本文5,900字 / 根拠 3/3  [*lec02p46 lec02p45 *lec02p47 lec02p48 *lec02p53 lec02p52 lec02p54 lec02p27 lec02p26 lec02p28 lec02p57 lec02p56 lec02p58]
+- top3＋前後1ページ: 7ページ / 本文3,487字 / 根拠 3/3  [*lec02p46 lec02p45 *lec02p47 lec02p48 *lec02p53 lec02p52 lec02p54]
+- Graph（元）: 10ページ / 本文5,424字 / 根拠 3/3  [*lec02p46 *lec02p47 *lec02p53 lec02p45 lec02p48 lec02p52 lec02p54 lec02p44 lec02p49 lec02p51]
+- Graph（用語で絞る）: 10ページ / 本文4,395字 / 根拠 3/3  [*lec02p46 *lec02p47 *lec02p53 lec02p27 lec02p57 lec02p28 lec02p55 lec02p20 lec02p50 lec02p58]
+  （用語で絞る Graph: 質問から拾った用語 ['ファインチューニング']，候補 38 ページ）
