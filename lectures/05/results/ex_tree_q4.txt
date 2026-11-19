@@ -1,186 +1,93 @@
-Traceback (most recent call last):
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 98, in map_httpcore_exceptions
-    yield
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 388, in handle_async_request
-    resp = await self._pool.handle_async_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/connection_pool.py", line 242, in handle_async_request
-    raise exc from None
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/connection_pool.py", line 224, in handle_async_request
-    response = await connection.handle_async_request(pool_request.request)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/connection.py", line 96, in handle_async_request
-    return await self._connection.handle_async_request(request)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 125, in handle_async_request
-    raise exc
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 97, in handle_async_request
-    ) = await self._receive_response_headers(**kwargs)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 167, in _receive_response_headers
-    event = await self._receive_event(timeout=timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_async/http11.py", line 200, in _receive_event
-    data = await self._network_stream.read(self.READ_NUM_BYTES, timeout=timeout)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_backends/anyio.py", line 34, in read
-    with map_exceptions(exc_map):
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
-    self.gen.throw(value)
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpcore2/_exceptions.py", line 17, in map_exceptions
-    raise to_exc(exc) from exc
-httpcore2.ReadTimeout
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/models/google.py", line 980, in _generate_content
-    return await func(model=self._model_name, contents=contents, config=config)  # pyright: ignore[reportReturnType]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/models.py", line 8507, in generate_content
-    return await self._generate_content_with_continuation(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/models.py", line 8346, in _generate_content_with_continuation
-    response = await self._generate_content(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/models.py", line 6944, in _generate_content
-    response = await self._api_client.async_request(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1885, in async_request
-    result = await self._async_request(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1818, in _async_request
-    return await self._async_retry(  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 112, in __call__
-    do = await self.iter(retry_state=retry_state)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 157, in iter
-    result = await action(retry_state)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/_utils.py", line 111, in inner
-    return call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 413, in exc_check
-    raise retry_exc.reraise()
-          ^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/__init__.py", line 184, in reraise
-    raise self.last_attempt.result()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 449, in result
-    return self.__get_result()
-           ^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
-    raise self._exception
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/tenacity/asyncio/__init__.py", line 116, in __call__
-    result = await fn(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/google/genai/_api_client.py", line 1791, in _async_request_once
-    client_response = await self._async_httpx_client.request(  # type: ignore[union-attr]
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1635, in request
-    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1818, in send
-    response = await self._send_handling_auth(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1846, in _send_handling_auth
-    response = await self._send_handling_redirects(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1881, in _send_handling_redirects
-    response = await self._send_single_request(request)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_client.py", line 1915, in _send_single_request
-    response = await transport.handle_async_request(request)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 387, in handle_async_request
-    with map_httpcore_exceptions():
-         ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
-    self.gen.throw(value)
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/httpx2/_transports/default.py", line 115, in map_httpcore_exceptions
-    raise mapped_exc(message) from exc
-httpx2.ReadTimeout
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/workspaces/lecture-ai-engineering-2026/app/agent.py", line 256, in <module>
-    main()
-  File "/workspaces/lecture-ai-engineering-2026/app/agent.py", line 245, in main
-    result = run_with_approval(target, args.question, build_model())
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/app/agent.py", line 197, in run_with_approval
-    result = target.run_sync(question, model=model)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/agent/abstract.py", line 827, in run_sync
-    return _utils.run_until_complete(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_utils.py", line 108, in run_until_complete
-    return _graph_run_until_complete(coro)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/_utils.py", line 116, in run_until_complete
-    return loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/agent/abstract.py", line 678, in run
-    node = await agent_run.next(node)  # pyright: ignore[reportArgumentType]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 656, in next
-    return await self._run_node_with_hooks(node, self._stream_and_advance)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 571, in _run_node_with_hooks
-    result = await lifecycle(node)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 551, in lifecycle
-    result = await step_fn(lifecycle_node)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 670, in _stream_and_advance
-    return await self._advance_graph(node)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/run.py", line 466, in _advance_graph
-    task = await self._graph_run.next(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 579, in next
-    return await anext(self)
-           ^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 556, in __anext__
-    raise self._next.error
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 857, in _run_tracked_task
-    result = await self._run_task(t_)
-             ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/graph_builder.py", line 915, in _run_task
-    output = await node.call(step_context)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_graph/step.py", line 253, in _call_node
-    return await node.run(GraphRunContext(state=ctx.state, deps=ctx.deps))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1397, in run
-    return await self._make_request(ctx)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1765, in _make_request
-    model_response = await model_handler(request_context)
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1748, in model_handler
-    response = await self._recover_model_request_error(ctx, run_context, req_ctx, e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 2136, in _recover_model_request_error
-    raise error
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1734, in model_handler
-    response = await model_request(
-               ^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/_agent_graph.py", line 1231, in model_request
-    new_response = await model.request(
-                   ^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/models/google.py", line 694, in request
-    response = await self._generate_content(messages, False, model_settings, model_request_parameters)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/lecture-ai-engineering-2026/.venv/lib/python3.12/site-packages/pydantic_ai/models/google.py", line 982, in _generate_content
-    raise _map_api_error(e, self._model_name, self._provider.model_id_namespace) from e
-pydantic_ai.exceptions.ModelAPIError: ReadTimeout
 [model] gemini-3.1-flash-lite
+第2回の講義資料に基づき、ご質問にお答えします。
+
+### Fine-Tuning（FT）で知識を足すのが難しい理由
+講義では、FTは主にモデルの「振る舞い」（出力形式、口調、手順の守り方など）を調整するのに適しており、新しい知識や事実を覚えさせるのには向いていないと説明されています。理由は以下の通りです。
+
+*   **非効率かつ誤りやすい:** 新しい知識をFTで覚えさせようとすると学習が遅く、また学習させるほどハルシネーション（もっともらしい嘘）が増える傾向があるという研究が報告されています（第2回・PDF p.46, p.47）。
+*   **モデルの保持能力:** FTはモデルが既に持っている知識の引き出し方を変えたり、新しいパターンを習得させたりすることには優れていますが、全く新しい情報を長期的に正確に保持させるには、より大規模な学習（継続事前学習など）が必要になるためです（第2回・PDF p.47, p.48）。
+
+### 知識を足したいときに使うべき手法
+知識（新しい事実や最新の資料など）をモデルに活用させたい場合は、**RAG（検索拡張生成：Retrieval-Augmented Generation）**を利用することが基本線として推奨されています（第2回・PDF p.46）。
+
+*   **RAGの利点:** 知識を問う課題において、RAGは文書をそのまま学習させるFTよりも一貫して高い性能を示すという研究結果があります。モデル自体を書き換えるのではなく、外部のデータベースから必要な情報を検索して回答に組み込むため、情報の更新や管理が容易であるという特性があります（第2回・PDF p.47）。
+
+---
+**考え方のヒント:**
+FTとRAGは「目的」に応じて使い分けることが重要です。「モデルに新しい言葉を覚えさせたいのか（知識）」、それとも「決まった形式で回答するようにさせたいのか（振る舞い）」という点を整理すると、どちらのアプローチが適切か判断しやすくなります。
+
+--- trace ---
+[tool call]   browse_tree({})
+[目次を開く] AIエンジニアリング実践講座2026 資料
+  直下の候補（ページは先頭文のみ）:
+    - lec01-main · AIエンジニアリング概論とAIコーディング
+    - lec02-main · 基盤モデルの仕組み
+    - lec03-main · AIエージェント
+[tool call]   browse_tree({'node_id': 'lec02-main'})
+[目次を開く] AIエンジニアリング実践講座2026 資料 → 基盤モデルの仕組み
+  直下の候補（ページは先頭文のみ）:
+    - lec02-main-p001 · PDF p.1 · 基盤モデルの仕組み
+      AI エンジニアリング講座 第 2 回
+    - lec02-main-p002 · PDF p.2 · 今日は「 [3] モデル学習」の中身、基盤モデルそのものを扱う
+      前回の振り返り
+    - lec02-main-p003 · PDF p.3 · チャットボットを作ると、すぐにこんな「厄介さ」に出会う
+      今日の問い
+    - lec02-main-p004 · PDF p.4 · 今日の 4 つの問い（各 15 分）
+      今日の構成
+    - lec02-main-p005 · PDF p.5 · 今日扱うのは「モデル」そのもの
+      今日の構成
+    - lec02-main-p006 · PDF p.6 · 今日の用語：先に 6 つだけ押さえる
+      今日の構成
+    - lec02-main-s007 · LLM は、確率で次の言葉を選ぶ
+    - lec02-main-s019 · 渡す・選ぶ／直す／考えさせる
+    - lec02-main-s030 · 基盤モデルの地図と選び方
+    - lec02-main-s045 · 選んだモデルを、いつ・どう直すか
+    - lec02-main-s063 · 補足：最新動向と詳しい説明
+[tool call]   browse_tree({'node_id': 'lec02-main-s045'})
+[目次を開く] AIエンジニアリング実践講座2026 資料 → 基盤モデルの仕組み → 選んだモデルを、いつ・どう直すか
+  直下の候補（ページは先頭文のみ）:
+    - lec02-main-p045 · PDF p.45 · 選んだモデルを、いつ・どう直すか
+      第 2 回　 4/4 （約 15 分）
+    - lec02-main-p046 · PDF p.46 · 小規模な FT は振る舞いに強く、知識の追加は苦手
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p047 · PDF p.47 · 根拠と諸説：知識の追加は RAG が効きやすい
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p048 · PDF p.48 · 継続事前学習（ CPT ）：知識・言語を足す追加学習
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p049 · PDF p.49 · FT は「コストを下げる」ためにも使う
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p050 · PDF p.50 · 判断の順番：測る → 分ける → プロンプト → Fine-Tuning
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p051 · PDF p.51 · PEFT ：モデル全体ではなく、一部だけを学習する
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p052 · PDF p.52 · LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p053 · PDF p.53 · チャットボットの場合：何を FT し、何を FT しないか
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p054 · PDF p.54 · 手本データの作り方：質問と、理想の回答の組を用意する
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p055 · PDF p.55 · FT の落とし穴：直したところ以外が、壊れていないか
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p056 · PDF p.56 · クイズ 4 ： Fine-Tuning が一番向いているのは？
+      クイズ 4/4
+    - lec02-main-p057 · PDF p.57 · クイズ 4 ： Fine-Tuning が一番向いているのは？（答え）
+      クイズ 4/4
+    - lec02-main-p058 · PDF p.58 · Fine-Tuning する前のチェックリスト
+      4/4 　選んだモデルを、いつ・どう直すか
+    - lec02-main-p059 · PDF p.59 · 第 2 回のまとめ： 4 つの芯と、明日やること
+      まとめ
+    - lec02-main-p060 · PDF p.60 · 今日の演習： QLoRA で出力形式を矯正し、効果を測る
+      演習
+    - lec02-main-p061 · PDF p.61 · 演習の進め方と提出物（仮）
+      演習
+    - lec02-main-p062 · PDF p.62 · 次回： AI エージェント。今日の性質が設計の前提になる
+      次回予告
+[tool call]   browse_tree({'node_id': 'lec02-main-p046'})
+[目次を開く] AIエンジニアリング実践講座2026 資料 → 基盤モデルの仕組み → 選んだモデルを、いつ・どう直すか → 小規模な FT は振る舞いに強く、知識の追加は苦手
+    （末端ページ・本文268文字を取得）
+[tool call]   browse_tree({'node_id': 'lec02-main-p047'})
+[目次を開く] AIエンジニアリング実践講座2026 資料 → 基盤モデルの仕組み → 選んだモデルを、いつ・どう直すか → 根拠と諸説：知識の追加は RAG が効きやすい
+    （末端ページ・本文640文字を取得）
+[time] 回答完了まで 68.65 秒（検索・埋め込みを含む）
+[usage] 入力 13,194 tokens / 出力 567 tokens / モデル応答 6 回
+[cost] 生成APIの推定コスト: $0.004149 USD（埋め込み・索引構築分は含まない）
